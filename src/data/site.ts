@@ -4,7 +4,7 @@ export const site = {
   url: 'https://www.suleymanakbulut.cv',
   email: 'suleymanakblt77@gmail.com',
   tagline:
-    'C# / .NET and Unity developer with five years of experience shipping commercial games and building the systems underneath them — multiplayer architecture, editor tooling, real-time renderers and performance-oriented libraries.',
+    'C# / .NET and Unity developer with 5+ years of experience shipping commercial games and building the systems underneath them — multiplayer architecture, editor tooling, real-time renderers and performance-oriented libraries.',
   metaDescription:
     'Süleyman Akbulut — Game & Systems Developer. C#/.NET and Unity: shipped Steam titles, multiplayer netcode, editor tooling, a DirectX 12 ray-traced engine and zero-allocation .NET libraries.',
   links: {

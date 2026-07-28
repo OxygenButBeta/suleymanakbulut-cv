@@ -5,6 +5,7 @@ export type Project = {
   href?: string;
   video?: string;
   group: 'tools' | 'systems' | 'apps';
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -14,6 +15,7 @@ export const projects: Project[] = [
       'Desktop AI coding editor for NVIDIA NIM models — chat and agentic modes, diff-reviewed file edits, command execution, a git panel and 120+ models.',
     tags: ['Electron', 'React', 'TypeScript'],
     href: 'https://github.com/OxygenButBeta/oxygen-code',
+    featured: true,
     group: 'apps',
   },
   {
@@ -22,6 +24,7 @@ export const projects: Project[] = [
       'Framework-agnostic TypeScript toolkit for AI desktop apps: typed NIM streaming client, model-agnostic agent loop with tool calling, workspace fs, git tooling and Windows-safe process spawning.',
     tags: ['TypeScript', 'Agent loop', 'Tooling'],
     href: 'https://github.com/OxygenButBeta/oxygen-forge',
+    featured: true,
     group: 'apps',
   },
   {
@@ -30,6 +33,7 @@ export const projects: Project[] = [
       'Cell-based world streaming for Unity — stream the view, keep the logic resident. Shipped as a UPM package.',
     tags: ['Unity', 'Streaming', 'UPM'],
     href: 'https://github.com/OxygenButBeta/O2.Horizon',
+    featured: true,
     group: 'systems',
   },
   {
@@ -38,6 +42,7 @@ export const projects: Project[] = [
       'Lightweight, high-performance .NET library for fast runtime access to object fields and properties without slow reflection calls. Built for serialization, debugging and runtime editing.',
     tags: ['.NET', 'Reflection-free', 'Performance'],
     href: 'https://github.com/OxygenButBeta/O2-Exposer',
+    featured: true,
     group: 'systems',
   },
   {
@@ -62,6 +67,7 @@ export const projects: Project[] = [
       'Maps Unity assets to enums through ScriptableObjects and Addressables, with generated code, runtime caching and editor integration — so asset references stop being magic strings.',
     tags: ['Unity', 'Addressables', 'Codegen'],
     href: 'https://github.com/OxygenButBeta/O2-Unity-Auto-Asset-Mapper',
+    featured: true,
     group: 'tools',
   },
   {
@@ -93,13 +99,14 @@ export const projects: Project[] = [
       'The engine before Ballistic: a Unity-inspired OpenGL engine in C# and OpenTK with a component system, GUID-based asset management, an input system and an ImGui editor.',
     tags: ['C#', 'OpenGL', 'OpenTK', 'ImGui'],
     href: 'https://github.com/OxygenButBeta/OxygenEngine',
+    featured: true,
     video: 'https://www.youtube.com/watch?v=yMBfimqNBg0',
     group: 'systems',
   },
   {
     name: 'OLANG',
     description:
-      'A toy language interpreter written to get better at AST work. Its own README calls it shitty; it was never the point.',
+      'A toy language interpreter written to get better at AST work — deliberately small, built to practise lexing, parsing and AST evaluation rather than to ship.',
     tags: ['C#', 'Interpreter', 'AST'],
     href: 'https://github.com/OxygenButBeta/OLANG',
     group: 'systems',

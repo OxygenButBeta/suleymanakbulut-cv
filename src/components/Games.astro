@@ -1,76 +1,132 @@
 ---
 import { games } from '../data/games';
+
+const groups = [
+  {
+    title: 'My own titles',
+    note: 'Mine end to end, published under Heavyworks Games — my own one-person studio.',
+    items: games.filter((g) => g.group === 'own'),
+  },
+  {
+    title: 'Titles I worked on for other teams',
+    note: 'Not my games and not my IP — I was brought in as a developer, on staff or on contract. Each entry covers only the part I built.',
+    items: games.filter((g) => g.group === 'contributed'),
+  },
+  {
+    title: 'Earlier mobile work',
+    note: 'Where I started — smaller mobile projects from before the PC titles.',
+    items: games.filter((g) => g.group === 'earlier'),
+  },
+];
 ---
 
 <section class="section" id="games">
   <div class="shell">
     <div class="section__head">
       <span class="section__index">05</span>
-      <h2 class="section__title">Games</h2>
+      <h2 class="section__title">Game credits</h2>
       <p class="section__aside">
-        Shipped titles and the mobile work before them. Every entry states what was mine.
+        Shipped titles and the mobile work before them, split by whose game it actually is.
       </p>
     </div>
 
-    <ul class="games">
-      {
-        games.map((g) => (
-          <li class={`game${g.featured ? ' game--featured' : ''}`}>
-            <a class="game__link" href={g.href}>
-              {g.cover && (
-                <span class="game__cover">
-                  <img
-                    src={g.cover}
-                    alt={`${g.title} store artwork`}
-                    width="460"
-                    height="215"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </span>
-              )}
-              <span class="game__inner">
-                <span class="game__head">
-                  <h3 class="game__title">{g.title}</h3>
-                  <span class="game__platform">{g.platform}</span>
-                </span>
-                <span class="game__role">
-                  {g.role} <span class="game__scope">· {g.scope}</span>
-                </span>
-                <span class="game__body">{g.description}</span>
-                <span class="tag-row game__tags">
-                  {g.tags.map((t) => (
-                    <span class="tag">{t}</span>
-                  ))}
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
-      <li class="game game--filler" aria-hidden="true"></li>
-      <li class="game game--filler" aria-hidden="true"></li>
-      <li class="game game--filler" aria-hidden="true"></li>
-    </ul>
+    {
+      groups.map((group) => (
+        <div class="group">
+          <div class="group__head">
+            <h3 class="group__title">{group.title}</h3>
+            <p class="group__note">{group.note}</p>
+          </div>
+
+          <ul class="games">
+            {group.items.map((g) => (
+              <li class={`game${g.featured ? ' game--featured' : ''}`}>
+                <a class="game__link" href={g.href}>
+                  {g.cover && (
+                    <span class="game__cover">
+                      <img
+                        src={g.cover}
+                        alt={`${g.title} store artwork`}
+                        width="460"
+                        height="215"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </span>
+                  )}
+                  <span class="game__inner">
+                    <span class="game__head">
+                      <h4 class="game__title">{g.title}</h4>
+                      <span class="game__platform">{g.platform}</span>
+                    </span>
+                    {g.studio && <span class="game__studio">{g.studio}</span>}
+                    <span class="game__role">
+                      {g.role} <span class="game__scope">· {g.scope}</span>
+                    </span>
+                    <span class="game__body">{g.description}</span>
+                    <span class="tag-row game__tags">
+                      {g.tags.map((t) => (
+                        <span class="tag">{t}</span>
+                      ))}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <p class="upcoming">
+      More titles are in production — under Heavyworks Games and at Londer Software — none announced
+      yet.
+    </p>
   </div>
 </section>
 
 <style>
+  .group + .group {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .group__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .group__title {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .group__note {
+    max-width: 48ch;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
   .games {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: 1px;
-    background: var(--line);
-    border: var(--rule);
   }
 
   .game {
     background: var(--paper);
+    box-shadow: 0 0 0 1px var(--line);
   }
 
   .game--featured {
     background: var(--paper-raised);
-    box-shadow: inset 2px 0 0 var(--accent);
+    box-shadow: 0 0 0 1px var(--line), inset 2px 0 0 var(--accent);
   }
 
   .game__link {
@@ -122,12 +178,30 @@ import { games } from '../data/games';
     font-size: 1.0625rem;
   }
 
-
   .game__platform {
     font-family: var(--mono);
     font-size: 0.6875rem;
     color: var(--muted);
     white-space: nowrap;
+  }
+
+  .upcoming {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    padding-top: 1rem;
+    border-top: var(--rule);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .game__studio {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .game__role {
@@ -136,6 +210,10 @@ import { games } from '../data/games';
     font-family: var(--mono);
     font-size: 0.75rem;
     color: var(--accent);
+  }
+
+  .game__studio + .game__role {
+    margin-top: 0.35rem;
   }
 
   .game__scope {
@@ -153,5 +231,4 @@ import { games } from '../data/games';
   .game__tags {
     margin-top: 1.25rem;
   }
-
 </style>

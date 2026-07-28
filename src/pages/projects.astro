@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import { projects } from '../data/projects';
+
+const groups = [
+  {
+    id: 'apps',
+    title: 'Apps',
+    note: 'Desktop applications and the toolkits behind them.',
+  },
+  {
+    id: 'systems',
+    title: 'Systems & engines',
+    note: 'Runtime systems, renderers, interpreters and performance-oriented libraries.',
+  },
+  {
+    id: 'tools',
+    title: 'Unity tooling',
+    note: 'Editor extensions and workflow tooling — the things I rebuild on every project.',
+  },
+].map((g) => ({ ...g, items: projects.filter((p) => p.group === g.id) }));
+---
+
+<Base
+  title="Open source"
+  description="Every open-source project by Süleyman Akbulut — Unity tooling, .NET libraries, engines, interpreters and desktop apps."
+>
+  <section class="head">
+    <div class="shell">
+      <span class="label">Open source</span>
+      <h1 class="head__title">Everything I have released</h1>
+      <p class="head__lede">
+        {projects.length} projects — Unity tooling, .NET libraries, engines and desktop apps. The
+        home page shows a shortlist; this is the full set.
+      </p>
+    </div>
+  </section>
+
+  {
+    groups.map((group) => (
+      <section class="group">
+        <div class="shell">
+          <div class="group__head">
+            <h2 class="group__title">{group.title}</h2>
+            <p class="group__note">{group.note}</p>
+          </div>
+          <ProjectGrid items={group.items} more={group.id === 'tools'} />
+        </div>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2rem, 4vw, 3rem);
+  }
+
+  .head__title {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: -0.03em;
+  }
+
+  .head__lede {
+    margin-top: 1.25rem;
+    max-width: 52ch;
+    color: var(--muted);
+  }
+
+  .group {
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+    border-top: var(--rule);
+  }
+
+  .group__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .group__title {
+    font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  }
+
+  .group__note {
+    max-width: 46ch;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+</style>

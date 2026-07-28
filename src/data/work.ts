@@ -28,7 +28,7 @@ export const work: Work[] = [
     kind: 'Engine',
     role: 'Solo developer',
     scope: 'Everything — renderer, editor, asset pipeline, scripting, netcode',
-    status: 'Active',
+    status: 'In active development',
     summary:
       'A .NET 9 game engine built from nothing: GPU-driven DirectX 12 renderer with hardware ray-traced global illumination, a full ImGui editor, Unity-style asset pipeline, C# hot-reload scripting, and a headless CLI that lets an agent drive the editor.',
     blurb:
@@ -115,17 +115,17 @@ export const work: Work[] = [
   {
     slug: 'zort',
     title: 'ZORT',
-    subtitle: 'Networking and server-authoritative AI on a live Steam title',
-    kind: 'Team project',
-    role: 'Developer',
-    scope: 'Networking systems, server/client integrated AI, gameplay mechanics',
+    subtitle: 'Netcode, enemy AI and optimization on a live Steam title',
+    kind: 'Londer Software title',
+    role: 'Game Programmer at Londer Software',
+    scope: 'Mirror netcode, enemy AI, core system optimization',
     credit:
-      'ZORT is not my game. I joined the existing team during its fourth chapter as a developer; what follows is my contribution, not the project as a whole.',
+      'ZORT is a Londer Software title — not my game and not my IP. I was hired onto the existing team as a game programmer for its Chapter 4 update; everything below is my own contribution, not a claim over the project as a whole.',
     status: 'Released on Steam',
     summary:
-      'A Unity and Mirror-based multiplayer title I joined during its fourth chapter as a developer, responsible for the networking layer, server/client integrated AI and core gameplay mechanics.',
+      'A Unity and Mirror-based multiplayer title I joined for its Chapter 4 update as a game programmer, expanding the netcode, programming the enemy AI and optimizing core systems in high-performance C#.',
     blurb:
-      'Unity + Mirror multiplayer. I own the networking systems, server/client integrated AI and core gameplay mechanics.',
+      "Londer Software's Unity + Mirror multiplayer title. I came in for the Chapter 4 update: expanding the netcode, programming the enemy AI and optimizing core systems.",
     stack: ['Unity', 'Mirror', 'C#'],
     cover: {
       src: '/media/games/zort.jpg',
@@ -136,8 +136,8 @@ export const work: Work[] = [
     },
     highlights: [
       { value: 'Chapter 4', label: 'Joined mid-production' },
-      { value: 'Mirror', label: 'Networking stack' },
-      { value: 'Server', label: 'Authoritative AI' },
+      { value: 'Mirror', label: 'Netcode stack' },
+      { value: 'C#', label: 'High-performance passes' },
     ],
     sections: [
       {
@@ -147,9 +147,9 @@ export const work: Work[] = [
       {
         heading: 'My contribution',
         bullets: [
-          'Implementing robust networking systems on top of Unity and Mirror.',
-          'Designing server/client integrated AI so behaviour stays authoritative on the server and still reads correctly on every client.',
-          'Coding fundamental gameplay mechanics alongside the networking work.',
+          'Expanding the Mirror netcode to carry features it was not originally scoped for.',
+          'Programming the enemy AI so behaviour stays authoritative on the server and still reads correctly on every client.',
+          'Optimizing core systems with high-performance C# — allocation-free hot paths over per-frame garbage.',
         ],
       },
     ],
@@ -159,12 +159,14 @@ export const work: Work[] = [
     slug: 'food-cart-simulator',
     title: 'Food Cart Simulator',
     subtitle: 'A commercial Steam release built end to end, alone',
-    kind: 'Commercial game',
-    role: 'Solo developer',
+    kind: 'My own game',
+    role: 'Solo developer — Heavyworks Games',
     scope: 'Everything — gameplay, systems, content, build, store release',
+    credit:
+      'My own title, published under Heavyworks Games — my one-person studio. Built from start to finish by me.',
     status: 'Released on Steam',
     summary:
-      'A PC simulation game I developed entirely on my own from start to finish in Unity, and shipped on Steam.',
+      'A PC simulation game I developed entirely on my own from start to finish in Unity, and shipped on Steam under my own studio, Heavyworks Games.',
     blurb:
       'Solo-developed PC title, start to finish in Unity — gameplay, systems, build and store release.',
     stack: ['Unity', 'C#', 'Steamworks'],
