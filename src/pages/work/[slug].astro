@@ -28,10 +28,8 @@ const next = work[(index + 1) % work.length];
             <p>{entry.role}</p>
           </div>
           <div>
-            <span class="label">Stack</span>
-            <div class="tag-row head__tags">
-              {entry.stack.map((s) => <span class="tag">{s}</span>)}
-            </div>
+            <span class="label">My scope</span>
+            <p>{entry.scope}</p>
           </div>
           <div>
             <span class="label">Links</span>
@@ -40,10 +38,38 @@ const next = work[(index + 1) % work.length];
             </p>
           </div>
         </div>
+
+        <div class="tag-row head__tags">
+          {entry.stack.map((s) => <span class="tag">{s}</span>)}
+        </div>
       </div>
     </header>
 
     <div class="shell">
+      {
+        entry.cover && (
+          <figure class:list={['cover', entry.cover.w < 1000 && 'cover--small']}>
+            <img
+              src={entry.cover.src}
+              alt={entry.cover.alt}
+              width={entry.cover.w}
+              height={entry.cover.h}
+              decoding="async"
+            />
+            <figcaption>{entry.cover.caption}</figcaption>
+          </figure>
+        )
+      }
+
+      {
+        entry.credit && (
+          <aside class="credit">
+            <span class="label">Credit</span>
+            <p>{entry.credit}</p>
+          </aside>
+        )
+      }
+
       <p class="summary">{entry.summary}</p>
 
       <ul class="stats">
@@ -76,6 +102,29 @@ const next = work[(index + 1) % work.length];
           ))
         }
       </div>
+
+      {
+        entry.gallery && (
+          <section class="gallery">
+            <h2 class="label gallery__heading">Captures</h2>
+            <div class="gallery__grid">
+              {entry.gallery.map((shot) => (
+                <figure class="shot">
+                  <img
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.w}
+                    height={shot.h}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption>{shot.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )
+      }
 
       <nav class="next" aria-label="Next project">
         <a class="next__link" href={`/work/${next.slug}`}>
@@ -124,7 +173,7 @@ const next = work[(index + 1) % work.length];
   }
 
   .head__tags {
-    margin-top: 0.6rem;
+    margin-top: 1.5rem;
   }
 
   .head__links {
@@ -141,6 +190,44 @@ const next = work[(index + 1) % work.length];
 
   .head__links a:hover {
     border-color: var(--accent);
+  }
+
+  .cover {
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+  }
+
+  .cover img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line-strong);
+  }
+
+  .cover--small {
+    max-width: 32rem;
+  }
+
+  .cover figcaption,
+  .shot figcaption {
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .credit {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding: 1.25rem 1.5rem;
+    border-left: 2px solid var(--accent);
+    background: var(--paper-raised);
+  }
+
+  .credit p {
+    max-width: 62ch;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
   }
 
   .summary {
@@ -238,6 +325,27 @@ const next = work[(index + 1) % work.length];
     background: var(--accent);
   }
 
+  .gallery {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: 1.5rem;
+  }
+
+  .shot {
+    margin: 0;
+  }
+
+  .shot img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line-strong);
+  }
+
   .next {
     padding-block: clamp(3rem, 6vw, 5rem);
   }
@@ -271,9 +379,10 @@ const next = work[(index + 1) % work.length];
   }
 
   @media (max-width: 38rem) {
-    .head__meta {
+    .head__meta,
+    .credit {
       grid-template-columns: minmax(0, 1fr);
-      gap: 1.5rem;
+      gap: 1rem;
     }
   }
 </style>

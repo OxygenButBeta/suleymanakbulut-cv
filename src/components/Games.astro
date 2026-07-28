@@ -8,7 +8,7 @@ import { games } from '../data/games';
       <span class="section__index">05</span>
       <h2 class="section__title">Games</h2>
       <p class="section__aside">
-        Shipped titles and the mobile work that came before them.
+        Shipped titles and the mobile work before them. Every entry states what was mine.
       </p>
     </div>
 
@@ -17,17 +17,33 @@ import { games } from '../data/games';
         games.map((g) => (
           <li class={`game${g.featured ? ' game--featured' : ''}`}>
             <a class="game__link" href={g.href}>
-              <div class="game__head">
-                <h3 class="game__title">{g.title}</h3>
-                <span class="game__platform">{g.platform}</span>
-              </div>
-              <p class="game__role">{g.role}</p>
-              <p class="game__body">{g.description}</p>
-              <div class="tag-row game__tags">
-                {g.tags.map((t) => (
-                  <span class="tag">{t}</span>
-                ))}
-              </div>
+              {g.cover && (
+                <span class="game__cover">
+                  <img
+                    src={g.cover}
+                    alt={`${g.title} store artwork`}
+                    width="460"
+                    height="215"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              )}
+              <span class="game__inner">
+                <span class="game__head">
+                  <h3 class="game__title">{g.title}</h3>
+                  <span class="game__platform">{g.platform}</span>
+                </span>
+                <span class="game__role">
+                  {g.role} <span class="game__scope">· {g.scope}</span>
+                </span>
+                <span class="game__body">{g.description}</span>
+                <span class="tag-row game__tags">
+                  {g.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </span>
+              </span>
             </a>
           </li>
         ))
@@ -58,12 +74,38 @@ import { games } from '../data/games';
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 1.5rem;
     transition: background 0.18s var(--ease);
   }
 
   .game__link:hover {
     background: var(--paper-deep);
+  }
+
+  .game__cover {
+    display: block;
+    aspect-ratio: 460 / 215;
+    overflow: hidden;
+    border-bottom: var(--rule);
+  }
+
+  .game__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85);
+    transition: transform 0.35s var(--ease), filter 0.35s var(--ease);
+  }
+
+  .game__link:hover .game__cover img {
+    transform: scale(1.03);
+    filter: saturate(1);
+  }
+
+  .game__inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem;
   }
 
   .game__head {
@@ -89,14 +131,20 @@ import { games } from '../data/games';
   }
 
   .game__role {
-    margin-top: 0.4rem;
+    display: block;
+    margin-top: 0.5rem;
     font-family: var(--mono);
     font-size: 0.75rem;
     color: var(--accent);
   }
 
+  .game__scope {
+    color: var(--muted);
+  }
+
   .game__body {
-    margin-top: 0.75rem;
+    display: block;
+    margin-top: 0.85rem;
     font-size: 0.9375rem;
     color: var(--muted);
     flex: 1;

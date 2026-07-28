@@ -1,4 +1,5 @@
 export type WorkLink = { label: string; href: string };
+export type Shot = { src: string; alt: string; caption: string; w: number; h: number };
 
 export type Work = {
   slug: string;
@@ -6,10 +7,14 @@ export type Work = {
   subtitle: string;
   kind: string;
   role: string;
+  scope: string;
+  credit?: string;
   status: string;
   summary: string;
   blurb: string;
   stack: string[];
+  cover?: Shot;
+  gallery?: Shot[];
   highlights: { value: string; label: string }[];
   sections: { heading: string; body?: string; bullets?: string[] }[];
   links: WorkLink[];
@@ -22,12 +27,50 @@ export const work: Work[] = [
     subtitle: 'A from-scratch C# engine with a ray-traced DirectX 12 renderer',
     kind: 'Engine',
     role: 'Solo developer',
+    scope: 'Everything — renderer, editor, asset pipeline, scripting, netcode',
     status: 'Active',
     summary:
       'A .NET 9 game engine built from nothing: GPU-driven DirectX 12 renderer with hardware ray-traced global illumination, a full ImGui editor, Unity-style asset pipeline, C# hot-reload scripting, and a headless CLI that lets an agent drive the editor.',
     blurb:
       'GPU-driven DX12 renderer with hardware ray-traced GI, an ImGui editor, hot-reloadable C# scripting and a headless agent surface.',
     stack: ['C#', '.NET 9', 'DirectX 12', 'DXR', 'HLSL', 'BepuPhysics 2', 'ImGui', 'Roslyn'],
+    cover: {
+      src: '/media/ballistic/suntemple-dome-interior.jpg',
+      alt: 'Ray-traced interior of the Sun Temple scene rendered in Ballistic Engine',
+      caption: 'Sun Temple interior — ray-traced GI',
+      w: 2000,
+      h: 970,
+    },
+    gallery: [
+      {
+        src: '/media/ballistic/suntemple-dome-exterior.jpg',
+        alt: 'Sun Temple dome exterior with volumetric lighting',
+        caption: 'Dome exterior — multi-bounce radiosity and volumetric fog',
+        w: 2000,
+        h: 974,
+      },
+      {
+        src: '/media/ballistic/suntemple-statue-backlit.jpg',
+        alt: 'Backlit statue showing indirect lighting and shadowing',
+        caption: 'Backlit statue — indirect light carried by the surface cache',
+        w: 2000,
+        h: 1028,
+      },
+      {
+        src: '/media/ballistic/suntemple-aerial.jpg',
+        alt: 'Aerial view of the Sun Temple scene',
+        caption: 'Aerial — GPU-driven submission across the full scene',
+        w: 2000,
+        h: 952,
+      },
+      {
+        src: '/media/ballistic/editor-overview.jpg',
+        alt: 'Ballistic Engine ImGui editor with scene hierarchy and inspector panels',
+        caption: 'The editor — ImGui, docked panels, live scene',
+        w: 2000,
+        h: 1038,
+      },
+    ],
     highlights: [
       { value: 'DXR', label: 'Hardware ray-traced GI' },
       { value: 'GPU-driven', label: 'ExecuteIndirect submission' },
@@ -36,7 +79,7 @@ export const work: Work[] = [
     sections: [
       {
         heading: 'Why',
-        body: 'Using an engine teaches you an engine\'s API. Writing one teaches you the machine underneath it. Ballistic is the project where I stopped treating the renderer, the asset pipeline and the scripting layer as black boxes and rebuilt each of them myself, in C#, on a modern explicit graphics API.',
+        body: "Using an engine teaches you an engine's API. Writing one teaches you the machine underneath it. Ballistic is the project where I stopped treating the renderer, the asset pipeline and the scripting layer as black boxes and rebuilt each of them myself, in C#, on a modern explicit graphics API.",
       },
       {
         heading: 'Rendering',
@@ -67,26 +110,34 @@ export const work: Work[] = [
         body: 'The headless CLI (bal) exposes the editor to automation: deterministic scripting, spatial queries via inline DXR RayQuery, G-buffer dumps and scene validation — everything returning JSON with meaningful exit codes.',
       },
     ],
-    links: [
-      { label: 'GitHub', href: 'https://github.com/OxygenButBeta/Ballistic-Engine' },
-    ],
+    links: [{ label: 'GitHub', href: 'https://github.com/OxygenButBeta/Ballistic-Engine' }],
   },
   {
     slug: 'zort',
     title: 'ZORT',
     subtitle: 'Networking and server-authoritative AI on a live Steam title',
-    kind: 'Commercial game',
+    kind: 'Team project',
     role: 'Developer',
+    scope: 'Networking systems, server/client integrated AI, gameplay mechanics',
+    credit:
+      'ZORT is not my game. I joined the existing team during its fourth chapter as a developer; what follows is my contribution, not the project as a whole.',
     status: 'Released on Steam',
     summary:
-      'A Unity and Mirror-based multiplayer title I joined during its fourth chapter, responsible for the networking layer, server/client integrated AI and core gameplay mechanics.',
+      'A Unity and Mirror-based multiplayer title I joined during its fourth chapter as a developer, responsible for the networking layer, server/client integrated AI and core gameplay mechanics.',
     blurb:
-      'Unity + Mirror multiplayer. Networking systems, server/client integrated AI and core gameplay mechanics.',
+      'Unity + Mirror multiplayer. I own the networking systems, server/client integrated AI and core gameplay mechanics.',
     stack: ['Unity', 'Mirror', 'C#'],
+    cover: {
+      src: '/media/games/zort.jpg',
+      alt: 'ZORT store artwork',
+      caption: 'ZORT — store artwork © the ZORT team',
+      w: 460,
+      h: 215,
+    },
     highlights: [
       { value: 'Chapter 4', label: 'Joined mid-production' },
       { value: 'Mirror', label: 'Networking stack' },
-      { value: 'Steam', label: 'Live title' },
+      { value: 'Server', label: 'Authoritative AI' },
     ],
     sections: [
       {
@@ -94,7 +145,7 @@ export const work: Work[] = [
         body: 'ZORT was already in production when I joined, at its fourth chapter. Coming into a live multiplayer codebase means the constraint is never a blank page — it is matching the conventions already in the project while making the network layer hold up under features it was not originally designed for.',
       },
       {
-        heading: 'What I own',
+        heading: 'My contribution',
         bullets: [
           'Implementing robust networking systems on top of Unity and Mirror.',
           'Designing server/client integrated AI so behaviour stays authoritative on the server and still reads correctly on every client.',
@@ -102,22 +153,28 @@ export const work: Work[] = [
         ],
       },
     ],
-    links: [
-      { label: 'Steam', href: 'https://store.steampowered.com/app/3121110/Zort/' },
-    ],
+    links: [{ label: 'Steam', href: 'https://store.steampowered.com/app/3121110/Zort/' }],
   },
   {
     slug: 'food-cart-simulator',
-    title: 'Dirty Street Food Simulator',
+    title: 'Food Cart Simulator',
     subtitle: 'A commercial Steam release built end to end, alone',
     kind: 'Commercial game',
     role: 'Solo developer',
+    scope: 'Everything — gameplay, systems, content, build, store release',
     status: 'Released on Steam',
     summary:
       'A PC simulation game I developed entirely on my own from start to finish in Unity, and shipped on Steam.',
     blurb:
       'Solo-developed PC title, start to finish in Unity — gameplay, systems, build and store release.',
     stack: ['Unity', 'C#', 'Steamworks'],
+    cover: {
+      src: '/media/games/food-cart-simulator.jpg',
+      alt: 'Food Cart Simulator store artwork',
+      caption: 'Food Cart Simulator on Steam',
+      w: 460,
+      h: 215,
+    },
     highlights: [
       { value: 'Solo', label: 'Every discipline' },
       { value: 'Steam', label: 'Published' },
@@ -146,6 +203,7 @@ export const work: Work[] = [
     subtitle: 'Zero-allocation bit manipulation for .NET',
     kind: 'Open-source library',
     role: 'Author',
+    scope: 'Library design, API, benchmarks',
     status: 'Maintained',
     summary:
       'A .NET library for packing state into bits without the usual mess of manual shifting — eight flags per byte, live handles into the source data, and no heap allocations anywhere on the hot path.',
@@ -181,10 +239,6 @@ export const work: Work[] = [
         ],
       },
     ],
-    links: [
-      { label: 'GitHub', href: 'https://github.com/OxygenButBeta/BitBolt' },
-    ],
+    links: [{ label: 'GitHub', href: 'https://github.com/OxygenButBeta/BitBolt' }],
   },
 ];
-
-export const workBySlug = (slug: string) => work.find((w) => w.slug === slug);

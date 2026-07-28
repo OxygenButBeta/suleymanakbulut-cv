@@ -18,6 +18,24 @@ import { work } from '../data/work';
           <li class="row">
             <a class="row__link" href={`/work/${w.slug}`}>
               <span class="row__num">{String(i + 1).padStart(2, '0')}</span>
+
+              <span class="row__thumb">
+                {w.cover ? (
+                  <img
+                    src={w.cover.src}
+                    alt={w.cover.alt}
+                    width={w.cover.w}
+                    height={w.cover.h}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="row__thumb-empty" aria-hidden="true">
+                    {w.title.slice(0, 2).toUpperCase()}
+                  </span>
+                )}
+              </span>
+
               <span class="row__body">
                 <span class="row__top">
                   <h3 class="row__title">{w.title}</h3>
@@ -30,6 +48,7 @@ import { work } from '../data/work';
                   ))}
                 </span>
               </span>
+
               <span class="row__meta">
                 <span class="row__role">{w.role}</span>
                 <span class="row__cta">
@@ -55,9 +74,9 @@ import { work } from '../data/work';
 
   .row__link {
     display: grid;
-    grid-template-columns: 3.5rem minmax(0, 1fr) 13rem;
+    grid-template-columns: 3rem 15rem minmax(0, 1fr) 11rem;
     gap: 1.5rem;
-    padding: clamp(1.5rem, 3vw, 2.25rem) 1rem;
+    padding: clamp(1.5rem, 3vw, 2rem) 1rem;
     transition: background 0.2s var(--ease), padding-inline 0.2s var(--ease);
   }
 
@@ -70,7 +89,39 @@ import { work } from '../data/work';
     font-family: var(--mono);
     font-size: 0.75rem;
     color: var(--accent);
-    padding-top: 0.55rem;
+    padding-top: 0.5rem;
+  }
+
+  .row__thumb {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background: var(--paper-deep);
+  }
+
+  .row__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85);
+    transition: transform 0.35s var(--ease), filter 0.35s var(--ease);
+  }
+
+  .row__link:hover .row__thumb img {
+    transform: scale(1.03);
+    filter: saturate(1);
+  }
+
+  .row__thumb-empty {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+    color: var(--line-strong);
   }
 
   .row__body {
@@ -85,7 +136,7 @@ import { work } from '../data/work';
   }
 
   .row__title {
-    font-size: clamp(1.375rem, 2.6vw, 1.875rem);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
   }
 
   .row__kind {
@@ -98,7 +149,7 @@ import { work } from '../data/work';
 
   .row__blurb {
     display: block;
-    max-width: 52ch;
+    max-width: 50ch;
     margin-top: 0.6rem;
     color: var(--ink-soft);
   }
@@ -127,21 +178,38 @@ import { work } from '../data/work';
     white-space: nowrap;
   }
 
-  @media (max-width: 62rem) {
+  @media (max-width: 72rem) {
     .row__link,
     .row__link:hover {
-      grid-template-columns: 2.5rem minmax(0, 1fr);
+      grid-template-columns: 3rem 11rem minmax(0, 1fr);
       padding-inline: 0;
     }
 
     .row__meta {
-      grid-column: 2;
+      grid-column: 3;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       text-align: left;
       margin-top: 1.25rem;
       width: 100%;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .row__link,
+    .row__link:hover {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .row__num {
+      padding-top: 0;
+    }
+
+    .row__meta {
+      grid-column: 1;
+      margin-top: 0.5rem;
     }
   }
 </style>
