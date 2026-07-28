@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Diagram of a cell grid around a streaming source: loaded cells, cells kept by hysteresis, and unloaded cells">
+  <rect width="640" height="360" fill="#edebe4"/>
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11" fill="#75736a" letter-spacing="1.5">
+    <text x="32" y="48">STREAMWORLD · CELL GRID</text>
+    <text x="608" y="48" text-anchor="end">STREAMSOURCE AT CENTER</text>
+    <text x="32" y="340">LOADED · KEPT BY HYSTERESIS · UNLOADED</text>
+  </g>
+  <g fill="#16344c">
+      <rect x="224" y="122" width="60" height="44"/>
+      <rect x="288" y="122" width="60" height="44"/>
+      <rect x="352" y="122" width="60" height="44"/>
+      <rect x="224" y="170" width="60" height="44"/>
+      <rect x="352" y="170" width="60" height="44"/>
+      <rect x="224" y="218" width="60" height="44"/>
+      <rect x="288" y="218" width="60" height="44"/>
+      <rect x="352" y="218" width="60" height="44"/>
+  </g>
+  <g fill="#16344c" opacity="0.28">
+      <rect x="160" y="74" width="60" height="44"/>
+      <rect x="224" y="74" width="60" height="44"/>
+      <rect x="288" y="74" width="60" height="44"/>
+      <rect x="352" y="74" width="60" height="44"/>
+      <rect x="416" y="74" width="60" height="44"/>
+      <rect x="160" y="122" width="60" height="44"/>
+      <rect x="416" y="122" width="60" height="44"/>
+      <rect x="160" y="170" width="60" height="44"/>
+      <rect x="416" y="170" width="60" height="44"/>
+      <rect x="160" y="218" width="60" height="44"/>
+      <rect x="416" y="218" width="60" height="44"/>
+      <rect x="160" y="266" width="60" height="44"/>
+      <rect x="224" y="266" width="60" height="44"/>
+      <rect x="288" y="266" width="60" height="44"/>
+      <rect x="352" y="266" width="60" height="44"/>
+      <rect x="416" y="266" width="60" height="44"/>
+  </g>
+  <g fill="none" stroke="#c3bfb2" stroke-width="1">
+      <rect x="32.5" y="74.5" width="59" height="43"/>
+      <rect x="96.5" y="74.5" width="59" height="43"/>
+      <rect x="480.5" y="74.5" width="59" height="43"/>
+      <rect x="544.5" y="74.5" width="59" height="43"/>
+      <rect x="32.5" y="122.5" width="59" height="43"/>
+      <rect x="96.5" y="122.5" width="59" height="43"/>
+      <rect x="480.5" y="122.5" width="59" height="43"/>
+      <rect x="544.5" y="122.5" width="59" height="43"/>
+      <rect x="32.5" y="170.5" width="59" height="43"/>
+      <rect x="96.5" y="170.5" width="59" height="43"/>
+      <rect x="480.5" y="170.5" width="59" height="43"/>
+      <rect x="544.5" y="170.5" width="59" height="43"/>
+      <rect x="32.5" y="218.5" width="59" height="43"/>
+      <rect x="96.5" y="218.5" width="59" height="43"/>
+      <rect x="480.5" y="218.5" width="59" height="43"/>
+      <rect x="544.5" y="218.5" width="59" height="43"/>
+      <rect x="32.5" y="266.5" width="59" height="43"/>
+      <rect x="96.5" y="266.5" width="59" height="43"/>
+      <rect x="480.5" y="266.5" width="59" height="43"/>
+      <rect x="544.5" y="266.5" width="59" height="43"/>
+  </g>
+  <rect x="288" y="170" width="60" height="44" fill="#f5f4f0" stroke="#16344c" stroke-width="2"/>
+  <circle cx="318.0" cy="192.0" r="5" fill="#16344c"/>
+</svg>

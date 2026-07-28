@@ -24,7 +24,7 @@ export const experience: Experience[] = [
   {
     org: 'Freelance / outsourced',
     role: 'Unity Developer for other studios',
-    period: 'Contract work · Remote',
+    period: '2024 — Present · Contract, remote',
     body: 'Paid development on games that belong to other people — none of these are my products, and my credit covers only the part I was hired for. On GOOD LUCK (Steam) that was converting the existing single-player build to multiplayer with Netcode for GameObjects and Steam Relay through Facepunch Steamworks.',
     tags: ['Unity', 'NGO', 'Steamworks'],
   },

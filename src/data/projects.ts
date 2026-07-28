@@ -28,11 +28,11 @@ export const projects: Project[] = [
     group: 'apps',
   },
   {
-    name: 'O2.Horizon',
+    name: 'BitBolt',
     description:
-      'Cell-based world streaming for Unity — stream the view, keep the logic resident. Shipped as a UPM package.',
-    tags: ['Unity', 'Streaming', 'UPM'],
-    href: 'https://github.com/OxygenButBeta/O2.Horizon',
+      'Zero-allocation bit manipulation for .NET — 64 flags in a single 64-bit field, live BitHandle references and a fluent Bind().To() API, benchmarked against raw bit-shifting.',
+    tags: ['.NET', 'ref struct', 'Zero-alloc'],
+    href: 'https://github.com/OxygenButBeta/BitBolt',
     featured: true,
     group: 'systems',
   },
