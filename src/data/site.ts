@@ -15,13 +15,8 @@ export const site = {
 
 export const focusAreas = [
   {
-    title: 'Real-Time Rendering',
-    body: 'GPU-driven DirectX 12 pipelines, hardware ray tracing, radiance caching and the usual post stack — GTAO, SSR, volumetric fog, TAA. OpenGL before that.',
-    tags: ['DirectX 12', 'DXR', 'HLSL', 'OpenGL'],
-  },
-  {
     title: 'Multiplayer & Netcode',
-    body: 'Server-authoritative replication, delta serialization and bit-packed state sync. Shipped on Mirror, Netcode for GameObjects and Steam Relay.',
+    body: 'Server-authoritative replication, delta serialization and bit-packed state sync. Shipped on Mirror, Netcode for GameObjects and Steam Relay — this is most of what I am paid to do.',
     tags: ['Mirror', 'NGO', 'Steamworks', 'LiteNetLib'],
   },
   {
@@ -33,5 +28,10 @@ export const focusAreas = [
     title: 'Performance-Oriented .NET',
     body: 'Zero-allocation APIs, ref structs, Roslyn source generators and DOTS/Job System work — measured with BenchmarkDotNet rather than guessed at.',
     tags: ['ref struct', 'Roslyn', 'DOTS', 'BenchmarkDotNet'],
+  },
+  {
+    title: 'Real-Time Rendering',
+    body: 'GPU-driven DirectX 12 pipelines, hardware ray tracing, radiance caching and the usual post stack — GTAO, SSR, volumetric fog, TAA. Self-driven work rather than paid work: it lives in Ballistic Engine.',
+    tags: ['DirectX 12', 'DXR', 'HLSL', 'OpenGL'],
   },
 ] as const;
