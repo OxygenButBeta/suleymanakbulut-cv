@@ -48,6 +48,9 @@ import { games } from '../data/games';
           </li>
         ))
       }
+      <li class="game game--filler" aria-hidden="true"></li>
+      <li class="game game--filler" aria-hidden="true"></li>
+      <li class="game game--filler" aria-hidden="true"></li>
     </ul>
   </div>
 </section>
@@ -66,8 +69,8 @@ import { games } from '../data/games';
   }
 
   .game--featured {
-    grid-column: span 2;
     background: var(--paper-raised);
+    box-shadow: inset 2px 0 0 var(--accent);
   }
 
   .game__link {
@@ -119,9 +122,6 @@ import { games } from '../data/games';
     font-size: 1.0625rem;
   }
 
-  .game--featured .game__title {
-    font-size: 1.375rem;
-  }
 
   .game__platform {
     font-family: var(--mono);
@@ -154,9 +154,4 @@ import { games } from '../data/games';
     margin-top: 1.25rem;
   }
 
-  @media (max-width: 48rem) {
-    .game--featured {
-      grid-column: span 1;
-    }
-  }
 </style>

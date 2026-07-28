@@ -16,11 +16,12 @@ import { experience } from '../data/experience';
       {
         experience.map((e) => (
           <li class="xp__item">
-            <div class="xp__period">{e.period || '—'}</div>
+            <div class="xp__marker" aria-hidden="true" />
             <div class="xp__content">
               <h3 class="xp__org">
                 {e.org} <span class="xp__role">/ {e.role}</span>
               </h3>
+              {e.period && <p class="xp__period">{e.period}</p>}
               <p class="xp__body">{e.body}</p>
               <div class="tag-row xp__tags">
                 {e.tags.map((t) => (
@@ -45,17 +46,16 @@ import { experience } from '../data/experience';
 
   .xp__item {
     display: grid;
-    grid-template-columns: 10rem minmax(0, 1fr);
-    gap: 2rem;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
     padding-block: 2rem;
     border-bottom: var(--rule);
   }
 
-  .xp__period {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    padding-top: 0.25rem;
+  .xp__marker {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: 0.6rem;
+    background: var(--accent);
   }
 
   .xp__org {
@@ -67,6 +67,13 @@ import { experience } from '../data/experience';
     font-weight: 400;
   }
 
+  .xp__period {
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
   .xp__body {
     margin-top: 0.6rem;
     max-width: 60ch;
@@ -76,12 +83,5 @@ import { experience } from '../data/experience';
 
   .xp__tags {
     margin-top: 1rem;
-  }
-
-  @media (max-width: 48rem) {
-    .xp__item {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.5rem;
-    }
   }
 </style>

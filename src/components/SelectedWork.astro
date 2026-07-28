@@ -20,7 +20,7 @@ import { work } from '../data/work';
               <span class="row__num">{String(i + 1).padStart(2, '0')}</span>
 
               <span class="row__thumb">
-                {w.cover ? (
+                {w.cover && (
                   <img
                     src={w.cover.src}
                     alt={w.cover.alt}
@@ -29,10 +29,6 @@ import { work } from '../data/work';
                     loading="lazy"
                     decoding="async"
                   />
-                ) : (
-                  <span class="row__thumb-empty" aria-hidden="true">
-                    {w.title.slice(0, 2).toUpperCase()}
-                  </span>
                 )}
               </span>
 
@@ -41,18 +37,22 @@ import { work } from '../data/work';
                   <h3 class="row__title">{w.title}</h3>
                   <span class="row__kind">{w.kind}</span>
                 </span>
+
                 <span class="row__blurb">{w.blurb}</span>
+
                 <span class="tag-row row__tags">
                   {w.stack.slice(0, 5).map((s) => (
                     <span class="tag">{s}</span>
                   ))}
                 </span>
-              </span>
 
-              <span class="row__meta">
-                <span class="row__role">{w.role}</span>
-                <span class="row__cta">
-                  Case study <span class="arrow">→</span>
+                <span class="row__foot">
+                  <span class="row__role">
+                    {w.role} <span class="row__scope">· {w.scope}</span>
+                  </span>
+                  <span class="row__cta">
+                    Case study <span class="arrow">→</span>
+                  </span>
                 </span>
               </span>
             </a>
@@ -74,26 +74,29 @@ import { work } from '../data/work';
 
   .row__link {
     display: grid;
-    grid-template-columns: 3rem 15rem minmax(0, 1fr) 11rem;
-    gap: 1.5rem;
-    padding: clamp(1.5rem, 3vw, 2rem) 1rem;
-    transition: background 0.2s var(--ease), padding-inline 0.2s var(--ease);
+    grid-template-columns: 2.5rem minmax(0, 21rem) minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    align-items: start;
+    padding: clamp(1.5rem, 3vw, 2.25rem) 1rem;
+    transition: background 0.2s var(--ease);
   }
 
   .row__link:hover {
     background: var(--paper-deep);
-    padding-inline: 1.5rem 0.5rem;
   }
 
   .row__num {
     font-family: var(--mono);
     font-size: 0.75rem;
     color: var(--accent);
-    padding-top: 0.5rem;
+    padding-top: 0.4rem;
   }
 
   .row__thumb {
     display: block;
+    align-self: start;
+    min-width: 0;
+    width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border: 1px solid var(--line-strong);
@@ -101,6 +104,7 @@ import { work } from '../data/work';
   }
 
   .row__thumb img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -113,19 +117,10 @@ import { work } from '../data/work';
     filter: saturate(1);
   }
 
-  .row__thumb-empty {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    font-family: var(--mono);
-    font-size: 1.25rem;
-    letter-spacing: 0.1em;
-    color: var(--line-strong);
-  }
-
   .row__body {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
   }
 
   .row__top {
@@ -136,7 +131,7 @@ import { work } from '../data/work';
   }
 
   .row__title {
-    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
   }
 
   .row__kind {
@@ -149,27 +144,33 @@ import { work } from '../data/work';
 
   .row__blurb {
     display: block;
-    max-width: 50ch;
-    margin-top: 0.6rem;
+    max-width: 52ch;
+    margin-top: 0.75rem;
     color: var(--ink-soft);
   }
 
   .row__tags {
-    margin-top: 1rem;
+    margin-top: 1.1rem;
   }
 
-  .row__meta {
+  .row__foot {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: var(--rule);
     font-family: var(--mono);
     font-size: 0.75rem;
-    text-align: right;
   }
 
   .row__role {
+    color: var(--ink);
+  }
+
+  .row__scope {
     color: var(--muted);
   }
 
@@ -178,38 +179,35 @@ import { work } from '../data/work';
     white-space: nowrap;
   }
 
-  @media (max-width: 72rem) {
-    .row__link,
-    .row__link:hover {
-      grid-template-columns: 3rem 11rem minmax(0, 1fr);
+  @media (max-width: 62rem) {
+    .row__link {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      row-gap: 1.25rem;
       padding-inline: 0;
     }
 
-    .row__meta {
-      grid-column: 3;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      text-align: left;
-      margin-top: 1.25rem;
-      width: 100%;
+    .row__thumb {
+      grid-column: 2;
+      max-width: 24rem;
+    }
+
+    .row__body {
+      grid-column: 2;
     }
   }
 
-  @media (max-width: 48rem) {
-    .row__link,
-    .row__link:hover {
+  @media (max-width: 38rem) {
+    .row__link {
       grid-template-columns: minmax(0, 1fr);
-      gap: 1rem;
     }
 
     .row__num {
       padding-top: 0;
     }
 
-    .row__meta {
+    .row__thumb,
+    .row__body {
       grid-column: 1;
-      margin-top: 0.5rem;
     }
   }
 </style>

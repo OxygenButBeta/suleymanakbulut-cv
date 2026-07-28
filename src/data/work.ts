@@ -35,13 +35,20 @@ export const work: Work[] = [
       'GPU-driven DX12 renderer with hardware ray-traced GI, an ImGui editor, hot-reloadable C# scripting and a headless agent surface.',
     stack: ['C#', '.NET 9', 'DirectX 12', 'DXR', 'HLSL', 'BepuPhysics 2', 'ImGui', 'Roslyn'],
     cover: {
-      src: '/media/ballistic/suntemple-dome-interior.jpg',
-      alt: 'Ray-traced interior of the Sun Temple scene rendered in Ballistic Engine',
-      caption: 'Sun Temple interior — ray-traced GI',
+      src: '/media/ballistic/suntemple-aerial.jpg',
+      alt: 'Aerial view of the Sun Temple scene rendered in Ballistic Engine',
+      caption: 'Sun Temple — hardware ray-traced global illumination',
       w: 2000,
-      h: 970,
+      h: 952,
     },
     gallery: [
+      {
+        src: '/media/ballistic/suntemple-dome-interior.jpg',
+        alt: 'Ray-traced interior of the Sun Temple dome',
+        caption: 'Dome interior — indirect light only, no baked lightmaps',
+        w: 2000,
+        h: 970,
+      },
       {
         src: '/media/ballistic/suntemple-dome-exterior.jpg',
         alt: 'Sun Temple dome exterior with volumetric lighting',
@@ -55,13 +62,6 @@ export const work: Work[] = [
         caption: 'Backlit statue — indirect light carried by the surface cache',
         w: 2000,
         h: 1028,
-      },
-      {
-        src: '/media/ballistic/suntemple-aerial.jpg',
-        alt: 'Aerial view of the Sun Temple scene',
-        caption: 'Aerial — GPU-driven submission across the full scene',
-        w: 2000,
-        h: 952,
       },
       {
         src: '/media/ballistic/editor-overview.jpg',
@@ -210,6 +210,13 @@ export const work: Work[] = [
     blurb:
       'Eight flags per byte, live BitHandle references, fluent Bind().To() API and zero GC pressure — benchmarked against raw bit-shifting.',
     stack: ['C#', '.NET', 'ref struct', 'BenchmarkDotNet'],
+    cover: {
+      src: '/media/bitbolt.svg',
+      alt: 'Diagram of 64 boolean flags packed into a single 64-bit field',
+      caption: 'One 64-bit field, 64 independent flags',
+      w: 640,
+      h: 360,
+    },
     highlights: [
       { value: '8×', label: 'Denser than one bool per byte' },
       { value: '0 B', label: 'Heap allocation' },

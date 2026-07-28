@@ -1,5 +1,6 @@
 ---
 import { projects } from '../data/projects';
+import { site } from '../data/site';
 ---
 
 <section class="section" id="projects">
@@ -40,6 +41,20 @@ import { projects } from '../data/projects';
           );
         })
       }
+
+      <a class="card card--more" href={site.links.github}>
+        <div class="card__head">
+          <h3 class="card__title">More on GitHub</h3>
+          <span class="arrow card__arrow">↗</span>
+        </div>
+        <p class="card__body">
+          Prototypes, case projects and the things that never made it out of the sandbox.
+        </p>
+      </a>
+
+      <span class="card card--filler" aria-hidden="true"></span>
+      <span class="card card--filler" aria-hidden="true"></span>
+      <span class="card card--filler" aria-hidden="true"></span>
     </div>
   </div>
 </section>
@@ -108,5 +123,13 @@ import { projects } from '../data/projects';
     color: var(--accent);
     border-bottom: 1px solid var(--line-strong);
     white-space: nowrap;
+  }
+
+  .card--more .card__title {
+    color: var(--accent);
+  }
+
+  .card--filler {
+    padding: 0;
   }
 </style>
