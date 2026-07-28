@@ -1,0 +1,279 @@
+---
+import Base from '../../layouts/Base.astro';
+import { work } from '../../data/work';
+
+export function getStaticPaths() {
+  return work.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const index = work.findIndex((w) => w.slug === entry.slug);
+const next = work[(index + 1) % work.length];
+---
+
+<Base title={entry.title} description={entry.summary}>
+  <article>
+    <header class="head">
+      <div class="shell">
+        <p class="label">{entry.kind} — {entry.status}</p>
+        <h1 class="head__title">{entry.title}</h1>
+        <p class="head__sub">{entry.subtitle}</p>
+
+        <div class="head__meta">
+          <div>
+            <span class="label">Role</span>
+            <p>{entry.role}</p>
+          </div>
+          <div>
+            <span class="label">Stack</span>
+            <div class="tag-row head__tags">
+              {entry.stack.map((s) => <span class="tag">{s}</span>)}
+            </div>
+          </div>
+          <div>
+            <span class="label">Links</span>
+            <p class="head__links">
+              {entry.links.map((l) => <a href={l.href}>{l.label} ↗</a>)}
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+      <p class="summary">{entry.summary}</p>
+
+      <ul class="stats">
+        {
+          entry.highlights.map((h) => (
+            <li class="stat">
+              <span class="stat__value">{h.value}</span>
+              <span class="stat__label">{h.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="body">
+        {
+          entry.sections.map((s) => (
+            <section class="block">
+              <h2 class="block__heading">{s.heading}</h2>
+              <div class="block__content">
+                {s.body && <p class="block__text">{s.body}</p>}
+                {s.bullets && (
+                  <ul class="bullets">
+                    {s.bullets.map((b) => (
+                      <li>{b}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <nav class="next" aria-label="Next project">
+        <a class="next__link" href={`/work/${next.slug}`}>
+          <span class="label">Next</span>
+          <span class="next__title">{next.title} <span class="arrow">→</span></span>
+        </a>
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+  }
+
+  .head__title {
+    margin-top: 1.25rem;
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    letter-spacing: -0.035em;
+  }
+
+  .head__sub {
+    margin-top: 1rem;
+    max-width: 48ch;
+    font-size: clamp(1rem, 1.6vw, 1.1875rem);
+    color: var(--muted);
+  }
+
+  .head__meta {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr) 12rem;
+    gap: 2rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: 1.75rem;
+    border-top: var(--rule);
+  }
+
+  .head__meta p {
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--ink);
+  }
+
+  .head__tags {
+    margin-top: 0.6rem;
+  }
+
+  .head__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .head__links a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--line-strong);
+    width: fit-content;
+  }
+
+  .head__links a:hover {
+    border-color: var(--accent);
+  }
+
+  .summary {
+    max-width: 60ch;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(1.0625rem, 2vw, 1.375rem);
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1px;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    background: var(--line);
+    border: var(--rule);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.5rem;
+    background: var(--paper);
+  }
+
+  .stat__value {
+    font-family: var(--mono);
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .stat__label {
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .body {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 2rem;
+    padding-block: 2.5rem;
+    border-bottom: var(--rule);
+  }
+
+  .block__heading {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.35rem;
+  }
+
+  .block__content {
+    max-width: 66ch;
+  }
+
+  .block__text {
+    font-size: 1.0625rem;
+    color: var(--ink-soft);
+  }
+
+  .bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .block__text + .bullets {
+    margin-top: 1.25rem;
+  }
+
+  .bullets li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--ink-soft);
+  }
+
+  .bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .next {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .next__link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .next__title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    transition: color 0.18s var(--ease);
+  }
+
+  .next__link:hover .next__title {
+    color: var(--accent);
+  }
+
+  @media (max-width: 62rem) {
+    .head__meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .block {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .head__meta {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

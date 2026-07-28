@@ -1,0 +1,46 @@
+---
+import { site } from '../data/site';
+
+const year = 2026;
+---
+
+<footer class="foot">
+  <div class="shell foot__inner">
+    <span>© {year} {site.name}</span>
+    <span class="foot__spacer"></span>
+    <a href={site.links.github}>GitHub</a>
+    <a href={site.links.linkedin}>LinkedIn</a>
+    <a href={`mailto:${site.email}`}>Email</a>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    border-top: var(--rule);
+    padding-block: 2rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .foot__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .foot__spacer {
+    flex: 1;
+  }
+
+  .foot a {
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+  }
+
+  .foot a:hover {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+</style>

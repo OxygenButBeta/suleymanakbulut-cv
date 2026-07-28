@@ -1,0 +1,112 @@
+---
+import { projects } from '../data/projects';
+---
+
+<section class="section" id="projects">
+  <div class="shell">
+    <div class="section__head">
+      <span class="section__index">04</span>
+      <h2 class="section__title">Tools &amp; libraries</h2>
+      <p class="section__aside">
+        Mostly things I needed and could not find — released as open source.
+      </p>
+    </div>
+
+    <div class="cards">
+      {
+        projects.map((p) => {
+          const href = p.href ?? p.video;
+          const Tag = href ? 'a' : 'div';
+          return (
+            <Tag class="card" href={href}>
+              <div class="card__head">
+                <h3 class="card__title">{p.name}</h3>
+                {href && <span class="arrow card__arrow">↗</span>}
+              </div>
+              <p class="card__body">{p.description}</p>
+              <div class="card__foot">
+                <div class="tag-row">
+                  {p.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </div>
+                {p.href && p.video && (
+                  <a class="card__extra" href={p.video}>
+                    video
+                  </a>
+                )}
+              </div>
+            </Tag>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: var(--rule);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: var(--paper);
+    transition: background 0.18s var(--ease);
+  }
+
+  a.card:hover {
+    background: var(--paper-raised);
+  }
+
+  .card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .card__title {
+    font-size: 1.0625rem;
+  }
+
+  .card__arrow {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  a.card:hover .card__arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .card__body {
+    font-size: 0.9375rem;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .card__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .card__extra {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--line-strong);
+    white-space: nowrap;
+  }
+</style>

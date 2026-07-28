@@ -1,0 +1,151 @@
+---
+import { site } from '../data/site';
+
+const spec = [
+  ['role', 'Game & Systems Developer'],
+  ['core', 'C# / .NET · Unity'],
+  ['also', 'C++ · Rust · TypeScript'],
+  ['domains', 'Netcode · Tooling · Rendering'],
+  ['shipped', 'Steam · Play Store'],
+  ['status', 'Open to opportunities'],
+];
+---
+
+<section class="hero">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="shell hero__inner">
+    <div class="hero__main">
+      <p class="label hero__eyebrow">Portfolio — {site.role}</p>
+      <h1 class="hero__name">{site.name}</h1>
+      <p class="hero__lede">{site.tagline}</p>
+      <div class="hero__actions">
+        <a class="btn" href="#work">Selected work <span class="arrow">→</span></a>
+        <a class="btn btn--ghost" href={site.links.github}>GitHub</a>
+        <a class="btn btn--ghost" href={site.links.linkedin}>LinkedIn</a>
+      </div>
+    </div>
+
+    <aside class="spec" aria-label="Profile summary">
+      <div class="spec__bar">
+        <span>profile</span>
+        <span>v2026</span>
+      </div>
+      <dl class="spec__list">
+        {
+          spec.map(([k, v]) => (
+            <div class="spec__row">
+              <dt>{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(4rem, 11vw, 9rem) clamp(3.5rem, 8vw, 6.5rem);
+    overflow: hidden;
+  }
+
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 5.5rem 5.5rem;
+    opacity: 0.5;
+    mask-image: radial-gradient(120% 90% at 15% 0%, #000 0%, transparent 72%);
+    pointer-events: none;
+  }
+
+  .hero__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__name {
+    font-size: clamp(2.75rem, 8.5vw, 5.5rem);
+    letter-spacing: -0.038em;
+    line-height: 0.98;
+  }
+
+  .hero__lede {
+    max-width: 44ch;
+    margin-top: 1.75rem;
+    font-size: clamp(1rem, 1.5vw, 1.1875rem);
+    line-height: 1.6;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .spec {
+    border: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+  }
+
+  .spec__bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.85rem;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .spec__list {
+    margin: 0;
+  }
+
+  .spec__row {
+    display: grid;
+    grid-template-columns: 5.25rem 1fr;
+    gap: 0.75rem;
+    padding: 0.7rem 0.85rem;
+    border-bottom: var(--rule);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .spec__row:last-child {
+    border-bottom: 0;
+  }
+
+  .spec__row dt {
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .spec__row dd {
+    margin: 0;
+    color: var(--ink);
+  }
+
+  @media (max-width: 62rem) {
+    .hero__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .spec {
+      max-width: 24rem;
+    }
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import { games } from '../data/games';
+---
+
+<section class="section" id="games">
+  <div class="shell">
+    <div class="section__head">
+      <span class="section__index">05</span>
+      <h2 class="section__title">Games</h2>
+      <p class="section__aside">
+        Shipped titles and the mobile work that came before them.
+      </p>
+    </div>
+
+    <ul class="games">
+      {
+        games.map((g) => (
+          <li class={`game${g.featured ? ' game--featured' : ''}`}>
+            <a class="game__link" href={g.href}>
+              <div class="game__head">
+                <h3 class="game__title">{g.title}</h3>
+                <span class="game__platform">{g.platform}</span>
+              </div>
+              <p class="game__role">{g.role}</p>
+              <p class="game__body">{g.description}</p>
+              <div class="tag-row game__tags">
+                {g.tags.map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .games {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: var(--rule);
+  }
+
+  .game {
+    background: var(--paper);
+  }
+
+  .game--featured {
+    grid-column: span 2;
+    background: var(--paper-raised);
+  }
+
+  .game__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.5rem;
+    transition: background 0.18s var(--ease);
+  }
+
+  .game__link:hover {
+    background: var(--paper-deep);
+  }
+
+  .game__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .game__title {
+    font-size: 1.0625rem;
+  }
+
+  .game--featured .game__title {
+    font-size: 1.375rem;
+  }
+
+  .game__platform {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .game__role {
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+
+  .game__body {
+    margin-top: 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .game__tags {
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 48rem) {
+    .game--featured {
+      grid-column: span 1;
+    }
+  }
+</style>

@@ -1,0 +1,107 @@
+---
+import { focusAreas } from '../data/site';
+---
+
+<section class="section" id="focus">
+  <div class="shell">
+    <div class="section__head">
+      <span class="section__index">02</span>
+      <h2 class="section__title">Technical focus</h2>
+    </div>
+
+    <div class="focus">
+      {
+        focusAreas.map((f, i) => (
+          <article class="focus__cell">
+            <span class="focus__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="focus__title">{f.title}</h3>
+            <p class="focus__body">{f.body}</p>
+            <div class="tag-row focus__tags">
+              {f.tags.map((t) => (
+                <span class="tag">{t}</span>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .focus {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .focus__cell {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem 2rem 0;
+    border-right: var(--rule);
+  }
+
+  .focus__cell:not(:first-child) {
+    padding-left: 1.5rem;
+  }
+
+  .focus__cell:last-child {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .focus__num {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+
+  .focus__title {
+    margin-top: 1rem;
+    font-size: 1.0625rem;
+  }
+
+  .focus__body {
+    margin-top: 0.75rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .focus__tags {
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 62rem) {
+    .focus {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .focus__cell:nth-child(2n) {
+      border-right: 0;
+      padding-right: 0;
+    }
+
+    .focus__cell:nth-child(n + 3) {
+      border-top: var(--rule);
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .focus {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .focus__cell {
+      border-right: 0;
+      padding: 1.75rem 0;
+    }
+
+    .focus__cell:not(:first-child) {
+      padding-left: 0;
+      border-top: var(--rule);
+    }
+  }
+</style>

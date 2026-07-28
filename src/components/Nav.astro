@@ -1,0 +1,103 @@
+---
+import { site } from '../data/site';
+
+const isHome = Astro.url.pathname === '/';
+const items = [
+  { label: 'Work', href: '/#work' },
+  { label: 'Focus', href: '/#focus' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Games', href: '/#games' },
+];
+---
+
+<header class="nav">
+  <div class="shell nav__inner">
+    <a class="nav__brand" href="/" aria-label="Home">
+      <span class="nav__mark" aria-hidden="true"></span>
+      <span class="nav__name">{isHome ? site.name : `← ${site.name}`}</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      {items.map((i) => <a href={i.href}>{i.label}</a>)}
+    </nav>
+    <a class="nav__cta" href={`mailto:${site.email}`}>Contact</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: var(--rule);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 3.75rem;
+  }
+
+  .nav__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .nav__mark {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--accent);
+    flex: none;
+  }
+
+  .nav__links {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .nav__links a {
+    padding-block: 0.25rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s var(--ease), border-color 0.15s var(--ease);
+  }
+
+  .nav__links a:hover {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+
+  .nav__cta {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 0.15rem;
+    transition: border-color 0.15s var(--ease);
+  }
+
+  .nav__cta:hover {
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 62rem) {
+    .nav__links {
+      display: none;
+    }
+
+    .nav__cta {
+      margin-left: auto;
+    }
+  }
+</style>

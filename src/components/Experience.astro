@@ -1,0 +1,87 @@
+---
+import { experience } from '../data/experience';
+---
+
+<section class="section" id="experience">
+  <div class="shell">
+    <div class="section__head">
+      <span class="section__index">03</span>
+      <h2 class="section__title">Experience</h2>
+      <p class="section__aside">
+        Five years across team projects, contract work and independent releases.
+      </p>
+    </div>
+
+    <ol class="xp">
+      {
+        experience.map((e) => (
+          <li class="xp__item">
+            <div class="xp__period">{e.period || '—'}</div>
+            <div class="xp__content">
+              <h3 class="xp__org">
+                {e.org} <span class="xp__role">/ {e.role}</span>
+              </h3>
+              <p class="xp__body">{e.body}</p>
+              <div class="tag-row xp__tags">
+                {e.tags.map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .xp {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .xp__item {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 2rem;
+    padding-block: 2rem;
+    border-bottom: var(--rule);
+  }
+
+  .xp__period {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-top: 0.25rem;
+  }
+
+  .xp__org {
+    font-size: 1.125rem;
+  }
+
+  .xp__role {
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .xp__body {
+    margin-top: 0.6rem;
+    max-width: 60ch;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+  }
+
+  .xp__tags {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 48rem) {
+    .xp__item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+    }
+  }
+</style>
