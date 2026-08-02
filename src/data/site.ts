@@ -31,7 +31,7 @@ export const focusAreas = [
   },
   {
     title: 'Real-Time Rendering',
-    body: 'GPU-driven DirectX 12 pipelines, hardware ray tracing, radiance caching and the usual post stack — GTAO, SSR, volumetric fog, TAA. Self-driven work rather than paid work: it lives in Ballistic Engine.',
+    body: 'GPU-driven DirectX 12 pipelines, hardware ray tracing, radiance caching and the usual post stack — GTAO, SSR, volumetric fog, TAA. Self-driven work rather than paid work: it lives in Ballistic Engine and its C++ successor, Ballista.',
     tags: ['DirectX 12', 'DXR', 'HLSL', 'OpenGL'],
   },
 ] as const;

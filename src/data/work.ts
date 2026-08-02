@@ -22,6 +22,74 @@ export type Work = {
 
 export const work: Work[] = [
   {
+    slug: 'ballista',
+    title: 'Ballista',
+    subtitle: 'A C++20 / DirectX 12 engine — the native successor to Ballistic',
+    kind: 'Engine',
+    role: 'Solo developer',
+    scope: 'Everything — RHI, renderer, ECS, asset import, editor, job system',
+    status: 'In active development',
+    summary:
+      'A from-scratch C++20 engine on DirectX 12: a bindless, render-graph-based renderer with GPU-driven culling, half-rate ray-traced global illumination through a world-space radiance cache with path guiding, SVGF-style denoising and FSR upscaling — every feature landed or reverted against a measured reference.',
+    blurb:
+      'The native successor to Ballistic: bindless DX12 render graph, GPU-driven culling and ray-traced GI through a world-space radiance cache, denoised and upscaled to a 14 ms 4K frame.',
+    stack: ['C++20', 'DirectX 12', 'DXR', 'HLSL', 'SDL3', 'ImGui', 'FidelityFX', 'CMake'],
+    cover: {
+      src: '/media/ballista/livingroom-wide.jpg',
+      alt: 'Living room scene rendered in Ballista with real-time ray-traced global illumination',
+      caption: 'Living room — real-time ray-traced GI, lit entirely by the sky through the windows',
+      w: 2000,
+      h: 1314,
+    },
+    gallery: [
+      {
+        src: '/media/ballista/livingroom-sofa.jpg',
+        alt: 'Close-up of the same living room scene inside the Ballista editor viewport',
+        caption: 'Editor viewport — indirect light and soft shadows from four rays a pixel',
+        w: 2000,
+        h: 1308,
+      },
+    ],
+    highlights: [
+      { value: 'Bindless', label: 'SM 6.6, one heap for the whole frame' },
+      { value: '4 rays', label: 'Per pixel — the rest is engineering' },
+      { value: '14 ms', label: 'Ray-traced 4K frame with FSR' },
+    ],
+    sections: [
+      {
+        heading: 'Why a second engine',
+        body: 'Ballistic proved out ray-traced GI and a full editor in C#. Ballista rebuilds that ground natively: C++20, explicit ownership of every allocation and barrier, and architectural decisions held to the standard of shipped engines rather than to what a demo would tolerate.',
+      },
+      {
+        heading: 'Renderer core',
+        bullets: [
+          'Bindless from day one — SM 6.6 descriptor heap indexing, a single global root signature for every pass, no per-draw descriptor tables.',
+          'A Frostbite-style render graph: passes declare reads and writes, barriers are compiled rather than hand-written, transient resources come from a pool.',
+          'GPU-driven culling emits indirect draw arguments per visible object, driven through ExecuteIndirect — the same cull runs again for the shadow view.',
+          'Multithreaded command recording on a custom job system: each pass records into its own command list.',
+        ],
+      },
+      {
+        heading: 'Global illumination',
+        bullets: [
+          'Hardware ray tracing at half rate, resolved back with a normal- and depth-weighted gather — four rays a pixel is the whole ray budget.',
+          'Bounces terminate in a world-space radiance cache hashed by quantised position and normal, so one traced bounce becomes all of them.',
+          'Path guiding off that same cache: each cell records where its light came from in solid-angle bins, and pixels draw half their rays from it — measurably closer to the reference at zero GPU cost.',
+          'SVGF-style temporal and a-trous denoising, then AMD FSR — which took the ray-traced 4K frame from 26.5 ms to 14 ms.',
+        ],
+      },
+      {
+        heading: 'The image pipeline',
+        body: 'Cook-Torrance PBR with HDRI image-based lighting, AgX tonemapping, dual-filter bloom, volumetric fog with a separately denoised sky-visibility volume, screen-space god rays, thin-lens depth of field, motion blur, and sphere and tube area lights with stochastic soft shadows.',
+      },
+      {
+        heading: 'Measured, not assumed',
+        body: 'Every change lands with numbers against a reference harness — and gets reverted with numbers when it loses. ReSTIR GI, a port of kajiya’s irradiance cache and neighbourhood history clamping were all built, measured and rejected. The recurring lesson: RMSE and 1:1 crops disagree about noise, and knowing which one to trust for which defect is half the work.',
+      },
+    ],
+    links: [{ label: 'YouTube demo', href: 'https://www.youtube.com/watch?v=Ako_dnJ5AF8' }],
+  },
+  {
     slug: 'ballistic-engine',
     title: 'Ballistic Engine',
     subtitle: 'A from-scratch C# engine with a ray-traced DirectX 12 renderer',
